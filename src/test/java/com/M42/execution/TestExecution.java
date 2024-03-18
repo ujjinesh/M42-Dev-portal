@@ -42,7 +42,7 @@ public class TestExecution extends BaseClass {
 	@Story("Story:Register a patient")
 	@Step("Verify Register a patient")
 	@Link(name = "M42 Dev Portal", url = "https://mh-dev-patientportal.azurewebsites.net/signup")
-	public void PatientRegistration()  {
+	public void PatientRegistration() throws Throwable  {
 
 		TestData td = new TestData();
 
@@ -58,6 +58,7 @@ public class TestExecution extends BaseClass {
 	
 	@AfterClass
 	public void close() {
+		
 		bs.teardown();
 	}
 	

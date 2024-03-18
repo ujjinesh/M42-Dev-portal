@@ -1,5 +1,6 @@
 package com.M42.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -48,26 +49,38 @@ public class RegistrationPage extends BaseClass {
 	@FindBy(xpath = "//*[@id='mobileNumber']")
 	WebElement mobileNumber;
 
-	@FindBy(xpath = "//*[@id='QRButton']")
+	@FindBy(xpath = "//*[text()='Save & Continue']")
 	WebElement QRButton;
+	
+	
+	@FindBy(xpath = "//*[@id='login-LoginButton']")
+	WebElement Login;
+	
 
-	public void PatientRegistration(String EID,String Expirydate, String Firstname, String Lastname,String DOB,
-			String email, String Mobilenumber) {
+	public void PatientRegistration(String EmirateID,String Expirydate, String Firstname, String Lastname,String DOB,
+			String emailId, String Mobilenumber) throws Throwable {
+
+		selenium_Function_utils.explicitwait(driver,"//*[@id='EmiratesIdNumber']");
+		selenium_Function_utils.click(driver, "//*[@id='EmiratesIdNumber']");
+		//selenium_Function_utils.MouseClick(driver, driver.findElement(By.xpath("//*[@id='EmiratesIdNumber']")));
+		selenium_Function_utils.Mousesendkeys(driver, EmirateID);
 		
-		//selenium_Function_utils.click(driver, Signup);
-		selenium_Function_utils.explicitwait(driver);
-		selenium_Function_utils.jstype(driver, EID, EmiratesIdNumber);
+		//selenium_Function_utils.jstype(driver, EmirateID, EmiratesIdNumber);
+		selenium_Function_utils.Mousesendkeys(driver,EmiratesExpiryDate, Expirydate);
+		selenium_Function_utils.Mousesendkeys(driver,QRFirstName, Firstname);
+		selenium_Function_utils.Mousesendkeys(driver,QRLastName, Lastname);
 		selenium_Function_utils.genderselection(driver);
-		selenium_Function_utils.jstype(driver, Expirydate, EmiratesExpiryDate);
-		selenium_Function_utils.jstype(driver, Firstname, QRFirstName);
-		selenium_Function_utils.jstype(driver, Lastname, QRLastName);
-		selenium_Function_utils.jstype(driver, DOB, DateofBirth);
-		selenium_Function_utils.jstype(driver, email, Email);
-		//selenium_Function_utils.click(driver, gmaildomain);
-		selenium_Function_utils.jstype(driver, Mobilenumber, mobileNumber);
-		selenium_Function_utils.screenshot(driver,".\\screenshot\\before_Reg_Click.jpg");
-		selenium_Function_utils.jsclick(driver, QRButton);
-		selenium_Function_utils.screenshot(driver,".\\screenshot\\After_Reg_Click.jpg");
+		selenium_Function_utils.Mousesendkeys(driver,DateofBirth, DOB);
+		selenium_Function_utils.Mousesendkeys(driver,Email, emailId);
+		selenium_Function_utils.MouseHoverelement(driver, gmaildomain);
+		selenium_Function_utils.Mousesendkeys(driver,mobileNumber, Mobilenumber);
+		selenium_Function_utils.screenshot(driver, ".\\screenshot\\before_Reg_Click.jpg");
+		selenium_Function_utils.MouseClick(driver, QRButton);
+		selenium_Function_utils.explicitwait(driver,"//*[@id='login-LoginButton']");
+		selenium_Function_utils.screenshot(driver, ".\\screenshot\\After_Reg_Click.jpg");
+		
+		
 
 	}
 }
+

@@ -14,6 +14,9 @@ public class BaseClass {
 
 	
 	public WebDriver initialize_driver() throws Throwable {
+		
+			//WebDriverManager.chromedriver().setup();
+		
 		if (Property.getValueForKey("Browser").equalsIgnoreCase("chrome")) {
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
